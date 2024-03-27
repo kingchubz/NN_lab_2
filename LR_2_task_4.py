@@ -1,3 +1,8 @@
+def warn(*args, **kwargs):
+    pass
+import warnings
+warnings.warn = warn
+
 import numpy as np
 import sklearn.metrics
 from pandas import read_csv
@@ -52,7 +57,7 @@ names = []
 
 for name, model in models.items():
     kfold = StratifiedKFold(n_splits=10, random_state=1, shuffle=True)
-    cv_results = cross_validate(model, X_train, Y_train, cv=kfold, scoring=['accuracy', 'recall', 'precision', 'f1'])
+    cv_results = cross_validate(model, X, y, cv=kfold, scoring=['accuracy', 'recall', 'precision', 'f1'])
     results.append(cv_results)
     names.append(name)
     print(f'\n{name}')
